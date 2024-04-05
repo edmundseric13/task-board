@@ -32,7 +32,6 @@ function createTaskCard(task) {
 function renderTaskList() {
     $("#todo-cards, #in-progress-cards, #done-cards").empty();
     taskList.forEach(task => {
-      console.log("Task Status: ", task.status);
       const card = createTaskCard(task);
       if (task.status === "to-do") {
         $("#todo-cards").append(card);
