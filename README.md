@@ -19,7 +19,3 @@ N/A
 ## Deployed URL
 
 https://edmundseric13.github.io/task-board/
-
-## Screenshot of Application
-
-
