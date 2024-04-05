@@ -20,14 +20,14 @@ function createTaskCard(task) {
     } else if (daysUntilDue <= 3) {
       card.addClass("due-soon");
     }
-    const now = dayjs();
-    const formattedDueDate = dayjs(task.dueDate, "YYYY-MM-DD");
-    if (now.isSame(taskDueDate, 'day')) {
-      taskCard.addClass('bg-warning text-white');
-  } else if (now.isAfter(taskDueDate)) {
-      taskCard.addClass('bg-danger text-white');
-      cardDeleteBtn.addClass('border-light');
-  }
+  //   const now = dayjs();
+  //   const formattedDueDate = dayjs(task.dueDate, "YYYY-MM-DD");
+  //   if (now.isSame(taskDueDate, 'day')) {
+  //     taskCard.addClass('bg-warning text-white');
+  // } else if (now.isAfter(taskDueDate)) {
+  //     taskCard.addClass('bg-danger text-white');
+  //     cardDeleteBtn.addClass('border-light');
+  // }
 
 
     const deleteButton = $("<button>").text("Delete").click(function() {
@@ -106,9 +106,11 @@ function handleDrop(event, ui) {
   
     if (taskIndex !== -1) {
       taskList[taskIndex].status = newStatus;
-  
-      ui.draggable.removeClass("overdue due-soon");
-  
+
+      if (newStatus === "done") {
+      ui.draggable.removeClass("overdue");
+      ui.draggable.removeClass("due-soon");
+      }
       localStorage.setItem("tasks", JSON.stringify(taskList));
       renderTaskList();
     }
