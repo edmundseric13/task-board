@@ -16,13 +16,22 @@ function createTaskCard(task) {
     const daysUntilDue = dueDate.diff(today, 'day');
 
     if (daysUntilDue < 0) {
-        card.addClass("overdue");
+      card.addClass("overdue");
     } else if (daysUntilDue <= 3) {
-        card.addClass("due-soon");
+      card.addClass("due-soon");
     }
+    const now = dayjs();
+    const formattedDueDate = dayjs(task.dueDate, "YYYY-MM-DD");
+    if (now.isSame(taskDueDate, 'day')) {
+      taskCard.addClass('bg-warning text-white');
+  } else if (now.isAfter(taskDueDate)) {
+      taskCard.addClass('bg-danger text-white');
+      cardDeleteBtn.addClass('border-light');
+  }
+
 
     const deleteButton = $("<button>").text("Delete").click(function() {
-        handleDeleteTask(task.id);
+      handleDeleteTask(task.id);
     });
 
     card.append(title, description, dueDateText, deleteButton);
